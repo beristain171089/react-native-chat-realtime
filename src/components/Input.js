@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Platform } from 'react-native';
 import { Item, Input as InpiutNB, Icon } from 'native-base'
 
-export default function Input() {
+export default function Input(props) {
+
+    const { sendMessage } = props;
+
+    const [message, setMessage] = useState('');
+
+    const onSubmit = () => {
+
+        if (message.length > 0) {
+            sendMessage(message);
+            setMessage('');
+        };
+
+    };
+
     return (
         <View style={styles.container}>
             <Item style={styles.itemInput}>
@@ -10,8 +24,10 @@ export default function Input() {
                     placeholder='Mensaje'
                     placeholderTextColor='grey'
                     style={styles.input}
+                    value={message}
+                    onChange={(e) => setMessage(e.nativeEvent.text)}
                 />
-                <TouchableOpacity>
+                <TouchableOpacity onPress={onSubmit}>
                     <Icon
                         name='send'
                         style={styles.iconSend}

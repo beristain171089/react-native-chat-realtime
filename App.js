@@ -13,7 +13,7 @@ export default function App() {
       {!userName ?
         <Login setuserName={setuserName} />
         :
-        <Chat />
+        <Chat userName={userName} />
       }
     </Container>
   );
